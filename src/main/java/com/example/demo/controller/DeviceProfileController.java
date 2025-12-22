@@ -34,6 +34,6 @@ public class DeviceProfileController {
 
     @GetMapping("/lookup/{deviceId}")
     public DeviceProfile getDevice(@PathVariable String deviceId) {
-        return deviceService.findByDeviceId(deviceId).orElseThrow();
+        return deviceService.findByDeviceId(deviceId);
     }
 }
