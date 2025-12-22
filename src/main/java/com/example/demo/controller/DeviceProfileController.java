@@ -5,26 +5,26 @@ import com.example.demo.service.DeviceProfileService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/devices")
 public class DeviceProfileController {
 
-    private final DeviceProfileService deviceService;
+    DeviceProfileService deviceService;   
 
     public DeviceProfileController(DeviceProfileService deviceService) {
         this.deviceService = deviceService;
     }
 
     @PostMapping
-    public DeviceProfile registerDevice(@RequestBody DeviceProfile device) {
+    public DeviceProfile register(@RequestBody DeviceProfile device) {
         return deviceService.registerDevice(device);
     }
 
     @PutMapping("/{id}/trust")
-    public DeviceProfile updateTrust(@PathVariable Long id,
-                                     @RequestParam boolean trusted) {
-        return deviceService.updateTrustStatus(id, trusted);
+    public DeviceProfile updateTrust(@PathVariable Long id, @RequestParam boolean trust) {
+        return deviceService.updateTrustStatus(id, trust);
     }
 
     @GetMapping("/user/{userId}")
@@ -33,7 +33,7 @@ public class DeviceProfileController {
     }
 
     @GetMapping("/lookup/{deviceId}")
-    public DeviceProfile getDevice(@PathVariable String deviceId) {
+    public Optional<DeviceProfile> getByDeviceId(@PathVariable String deviceId) {
         return deviceService.findByDeviceId(deviceId);
     }
 }

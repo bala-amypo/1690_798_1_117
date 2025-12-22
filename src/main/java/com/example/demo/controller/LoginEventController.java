@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/api/logins")
 public class LoginEventController {
 
-    private final LoginEventService loginService;
+    LoginEventService loginService;   
 
     public LoginEventController(LoginEventService loginService) {
         this.loginService = loginService;
@@ -22,17 +22,17 @@ public class LoginEventController {
     }
 
     @GetMapping("/user/{userId}")
-    public List<LoginEvent> getUserLogins(@PathVariable Long userId) {
+    public List<LoginEvent> getByUser(@PathVariable Long userId) {
         return loginService.getEventsByUser(userId);
     }
 
     @GetMapping("/suspicious/{userId}")
-    public List<LoginEvent> getSuspiciousLogins(@PathVariable Long userId) {
+    public List<LoginEvent> getSuspicious(@PathVariable Long userId) {
         return loginService.getSuspiciousLogins(userId);
     }
 
     @GetMapping
-    public List<LoginEvent> getAllLogins() {
+    public List<LoginEvent> getAll() {
         return loginService.getAllEvents();
     }
 }
