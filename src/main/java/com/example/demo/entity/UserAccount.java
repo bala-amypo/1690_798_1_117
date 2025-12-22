@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class UserAccount {
@@ -10,64 +9,42 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String employeeId;
-
-    @Column(unique = true)
     private String username;
-
-    @Column(unique = true)
     private String email;
-
     private String password;
     private String role;
     private String status;
-    private LocalDateTime createdAt;
 
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        if (this.status == null) this.status = "ACTIVE";
-        if (this.role == null) this.role = "USER";
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public Long getId() {
-        return id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {
         return username;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

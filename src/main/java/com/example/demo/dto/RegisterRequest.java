@@ -8,9 +8,23 @@ public class RegisterRequest {
     private String password;
     private String role;
 
-    public String getEmployeeId() { return employeeId; }
-    public String getUsername() { return username; }
-    public String getEmail() { return email; }
-    public String getPassword() { return password; }
-    public String getRole() { return role; }
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getRole() {
+        return role;
+    }
 }
