@@ -1,9 +1,10 @@
 package com.example.demo.dto;
 
 public class LoginRequest {
-    private String email;
+
+    private String usernameOrEmail;
     private String password;
 
-    public String getEmail() { return email; }
+    public String getUsernameOrEmail() { return usernameOrEmail; }
     public String getPassword() { return password; }
 }
