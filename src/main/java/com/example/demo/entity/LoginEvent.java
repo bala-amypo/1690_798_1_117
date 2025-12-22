@@ -1,3 +1,8 @@
+package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
 @Entity
 public class LoginEvent {
 
@@ -9,12 +14,7 @@ public class LoginEvent {
     private String ipAddress;
     private String deviceId;
     private String loginStatus;
+    private LocalDateTime loginTime;
 
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
+    // getters and setters
 }
