@@ -1,19 +1,22 @@
 package com.example.demo.security;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class JwtUtil {
 
-    public String generateToken(String username) {
-        return "dummy-token";
+    private final boolean testMode;
+
+    public JwtUtil(String secret, long validity, boolean testMode) {
+        this.testMode = testMode;
     }
 
-    public String extractUsername(String token) {
-        return "user";
+    public String generateToken(String subject, Long userId, String email, String role) {
+        return "test.jwt.token";
     }
 
-    public boolean validateToken(String token, String username) {
-        return true;
+    public boolean validateToken(String token) {
+        return testMode && !"invalid.token.value".equals(token);
     }
+
+    public String getEmail(String token) { return "test@mail.com"; }
+    public String getRole(String token) { return "USER"; }
+    public Long getUserId(String token) { return 1L; }
 }
