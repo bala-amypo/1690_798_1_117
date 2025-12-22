@@ -1,5 +1,8 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
 @Entity
 public class DeviceProfile {
 
@@ -9,18 +12,8 @@ public class DeviceProfile {
 
     private Long userId;
     private String deviceId;
-    private boolean isTrusted;
+    private Boolean isTrusted;
     private LocalDateTime lastSeen;
 
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setLastSeen(LocalDateTime lastSeen) {
-        this.lastSeen = lastSeen;
-    }
-
-    public void setIsTrusted(boolean trusted) {
-        this.isTrusted = trusted;
-    }
+    // getters and setters
 }
