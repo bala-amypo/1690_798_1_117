@@ -16,6 +16,32 @@ public class UserAccount {
     private String role;
     private String status;
 
+    // ===== GETTERS =====
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    // ===== SETTERS =====
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
@@ -36,15 +62,7 @@ public class UserAccount {
         this.role = role;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

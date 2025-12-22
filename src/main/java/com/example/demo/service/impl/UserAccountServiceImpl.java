@@ -1,12 +1,3 @@
-package com.example.demo.service.impl;
-
-import com.example.demo.entity.UserAccount;
-import com.example.demo.repository.UserAccountRepository;
-import com.example.demo.service.UserAccountService;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
 
@@ -17,8 +8,13 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public void createUser(UserAccount user) {
-        repo.save(user);
+    public UserAccount createUser(UserAccount user) {
+        return repo.save(user);
+    }
+
+    @Override
+    public UserAccount getUserById(Long id) {
+        return repo.findById(id).orElseThrow();
     }
 
     @Override
@@ -27,10 +23,10 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public void updateUserStatus(Long id, String status) {
+    public UserAccount updateUserStatus(Long id, String status) {
         UserAccount user = repo.findById(id).orElseThrow();
         user.setStatus(status);
-        repo.save(user);
+        return repo.save(user);
     }
 
     @Override

@@ -1,7 +1,3 @@
-package com.example.demo.entity;
-
-import jakarta.persistence.*;
-
 @Entity
 public class PolicyRule {
 
@@ -9,13 +5,29 @@ public class PolicyRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String ruleCode;
-
     private String description;
     private String severity;
     private String conditionsJson;
     private Boolean active;
 
-    // getters and setters
+    public String getRuleCode() {
+        return ruleCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public String getConditionsJson() {
+        return conditionsJson;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
 }
