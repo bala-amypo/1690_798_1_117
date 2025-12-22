@@ -5,9 +5,11 @@ import java.util.List;
 
 public interface DeviceProfileService {
 
-    DeviceProfile save(DeviceProfile device);
+    DeviceProfile registerDevice(DeviceProfile device);
 
-    List<DeviceProfile> getByUserId(Long userId);
+    DeviceProfile updateTrustStatus(Long id, boolean trusted);
 
-    DeviceProfile getByDeviceId(String deviceId);
+    List<DeviceProfile> getDevicesByUser(Long userId);
+
+    DeviceProfile findByDeviceId(String deviceId);
 }

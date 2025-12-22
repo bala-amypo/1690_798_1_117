@@ -10,24 +10,31 @@ import java.util.List;
 @Service
 public class DeviceProfileServiceImpl implements DeviceProfileService {
 
-    private final DeviceProfileRepository deviceRepo;
+    private final DeviceProfileRepository repo;
 
-    public DeviceProfileServiceImpl(DeviceProfileRepository deviceRepo) {
-        this.deviceRepo = deviceRepo;
+    public DeviceProfileServiceImpl(DeviceProfileRepository repo) {
+        this.repo = repo;
     }
 
     @Override
-    public DeviceProfile save(DeviceProfile device) {
-        return deviceRepo.save(device);
+    public DeviceProfile registerDevice(DeviceProfile device) {
+        return repo.save(device);
     }
 
     @Override
-    public List<DeviceProfile> getByUserId(Long userId) {
-        return deviceRepo.findByUserId(userId);
+    public DeviceProfile updateTrustStatus(Long id, boolean trusted) {
+        DeviceProfile device = repo.findById(id).orElseThrow();
+        device.setIsTrusted(trusted);
+        return repo.save(device);
     }
 
     @Override
-    public DeviceProfile getByDeviceId(String deviceId) {
-        return deviceRepo.findByDeviceId(deviceId);
+    public List<DeviceProfile> getDevicesByUser(Long userId) {
+        return repo.findByUserId(userId);
+    }
+
+    @Override
+    public DeviceProfile findByDeviceId(String deviceId) {
+        return repo.findByDeviceId(deviceId);
     }
 }
