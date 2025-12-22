@@ -10,16 +10,17 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserAccountController {
 
-    private final UserAccountService userService;
+    UserAccountService userService;  
 
     public UserAccountController(UserAccountService userService) {
         this.userService = userService;
     }
 
     @PostMapping
-    public UserAccount createUser(@RequestBody UserAccount user) {
-        return userService.createUser(user);
+    public UserAccount create(@RequestBody UserAccount user) {
+        return userService.createUser(user); 
     }
+
 
     @GetMapping("/{id}")
     public UserAccount getUser(@PathVariable Long id) {
@@ -27,8 +28,7 @@ public class UserAccountController {
     }
 
     @PutMapping("/{id}/status")
-    public UserAccount updateStatus(@PathVariable Long id,
-                                    @RequestParam String status) {
+    public UserAccount updateStatus(@PathVariable Long id, @RequestParam String status) {
         return userService.updateUserStatus(id, status);
     }
 

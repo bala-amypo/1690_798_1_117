@@ -1,56 +1,92 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 @Entity
 public class ViolationRecord {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String ruleCode;
+    private long id;
+    private long userId;
+    private long PolicyRuleId;
+    private long eventId;
+    private String violationType;
+    private String details;
     private String severity;
-    private String description;
-
-    private boolean resolved;
-
     private LocalDateTime detectedAt;
-
-    @PrePersist
-    public void onCreate() {
-        this.detectedAt = LocalDateTime.now();
-        this.resolved = false;
+    private Boolean resolved;
+    public ViolationRecord() {
     }
-
-    // ✅ GETTERS
-    public Long getId() {
+    public ViolationRecord(long userId, long policyRuleId, long eventId, String violationType, String details,
+        String severity, LocalDateTime detectedAt, Boolean resolved) {
+        this.userId = userId;
+        PolicyRuleId = policyRuleId;
+        this.eventId = eventId;
+        this.violationType = violationType;
+        this.details = details;
+        this.severity = severity;
+        this.detectedAt = detectedAt;
+        this.resolved = resolved;
+    }
+    public long getId() {
         return id;
     }
-
-    public String getRuleCode() {
-        return ruleCode;
+    public void setId(long id) {
+        this.id = id;
     }
-
+    public long getUserId() {
+        return userId;
+    }
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+    public long getPolicyRuleId() {
+        return PolicyRuleId;
+    }
+    public void setPolicyRuleId(long policyRuleId) {
+        PolicyRuleId = policyRuleId;
+    }
+    public long getEventId() {
+        return eventId;
+    }
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
+    }
+    public String getViolationType() {
+        return violationType;
+    }
+    public void setViolationType(String violationType) {
+        this.violationType = violationType;
+    }
+    public String getDetails() {
+        return details;
+    }
+    public void setDetails(String details) {
+        this.details = details;
+    }
     public String getSeverity() {
         return severity;
     }
-
-    public String getDescription() {
-        return description;
+    public void setSeverity(String severity) {
+        this.severity = severity;
     }
-
-    public boolean isResolved() {
-        return resolved;
-    }
-
     public LocalDateTime getDetectedAt() {
         return detectedAt;
     }
-
-    // ✅ SETTERS
-    public void setResolved(boolean resolved) {
+    public void setDetectedAt(LocalDateTime detectedAt) {
+        this.detectedAt = detectedAt;
+    }
+    public Boolean getResolved() {
+        return resolved;
+    }
+    public void setResolved(Boolean resolved) {
         this.resolved = resolved;
     }
+    
 }
+
