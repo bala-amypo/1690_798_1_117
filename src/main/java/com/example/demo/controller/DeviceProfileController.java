@@ -2,38 +2,42 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.DeviceProfile;
 import com.example.demo.service.DeviceProfileService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/devices")
 public class DeviceProfileController {
 
-    DeviceProfileService deviceService;   
+    private final DeviceProfileService service;
 
-    public DeviceProfileController(DeviceProfileService deviceService) {
-        this.deviceService = deviceService;
+    public DeviceProfileController(DeviceProfileService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public DeviceProfile register(@RequestBody DeviceProfile device) {
-        return deviceService.registerDevice(device);
+    public ResponseEntity<DeviceProfile> register(@RequestBody DeviceProfile device) {
+        return ResponseEntity.ok(service.registerDevice(device));
     }
 
     @PutMapping("/{id}/trust")
-    public DeviceProfile updateTrust(@PathVariable Long id, @RequestParam boolean trust) {
-        return deviceService.updateTrustStatus(id, trust);
+    public ResponseEntity<DeviceProfile> updateTrust(
+            @PathVariable Long id,
+            @RequestParam boolean trust) {
+        return ResponseEntity.ok(service.updateTrustStatus(id, trust));
     }
 
     @GetMapping("/user/{userId}")
-    public List<DeviceProfile> getDevicesByUser(@PathVariable Long userId) {
-        return deviceService.getDevicesByUser(userId);
+    public ResponseEntity<List<DeviceProfile>> byUser(@PathVariable Long userId) {
+        return ResponseEntity.ok(service.getDevicesByUser(userId));
     }
 
     @GetMapping("/lookup/{deviceId}")
-    public Optional<DeviceProfile> getByDeviceId(@PathVariable String deviceId) {
-        return deviceService.findByDeviceId(deviceId);
+    public ResponseEntity<DeviceProfile> lookup(@PathVariable String deviceId) {
+        return ResponseEntity.ok(
+                service.findByDeviceId(deviceId).orElse(null)
+        );
     }
 }
