@@ -8,7 +8,8 @@ import com.example.demo.service.DeviceProfileService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
+import org.springframework.stereotype.Service;
+@Service
 public class DeviceProfileServiceImpl implements DeviceProfileService {
 
     private final DeviceProfileRepository deviceRepo;

@@ -7,6 +7,8 @@ import com.example.demo.util.RuleEvaluationUtil;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+@Service
 public class LoginEventServiceImpl implements LoginEventService {
 
     private final LoginEventRepository loginRepo;
