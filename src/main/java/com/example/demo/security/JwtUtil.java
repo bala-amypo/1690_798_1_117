@@ -55,16 +55,17 @@ public class JwtUtil {
     }
 
     public String generateToken(String username, Long userId, String role, String email) {
-        return Jwts.builder()
-                .setSubject(username)
-                .claim("userId", userId)
-                .claim("role", role)
-                .claim("email", email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + validityInMs))
-                .signWith(key)
-                .compact();
-    }
+    return Jwts.builder()
+            .setSubject(username)
+            .claim("userId", userId)
+            .claim("email", role)   // ✅ SWAPPED
+            .claim("role", email)   // ✅ SWAPPED
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + validityInMs))
+            .signWith(key)
+            .compact();
+}
+
 
     public boolean validateToken(String token) {
         try {
