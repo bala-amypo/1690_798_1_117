@@ -4,9 +4,10 @@ import com.example.demo.entity.PolicyRule;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.PolicyRuleRepository;
 import com.example.demo.service.PolicyRuleService;
+
 import java.util.List;
-import org.springframework.stereotype.Service;
-@Service
+import java.util.Optional;
+
 public class PolicyRuleServiceImpl implements PolicyRuleService {
 
     private final PolicyRuleRepository ruleRepo;
@@ -15,29 +16,38 @@ public class PolicyRuleServiceImpl implements PolicyRuleService {
         this.ruleRepo = ruleRepo;
     }
 
+    @Override
     public PolicyRule createRule(PolicyRule rule) {
         return ruleRepo.save(rule);
     }
 
-    public PolicyRule updateRule(Long id, PolicyRule rule) {
+    @Override
+    public PolicyRule updateRule(Long id, PolicyRule updated) {
         PolicyRule existing = ruleRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Rule not found"));
-        existing.setDescription(rule.getDescription());
-        existing.setSeverity(rule.getSeverity());
-        existing.setConditionsJson(rule.getConditionsJson());
-        existing.setActive(rule.getActive());
+
+        existing.setRuleCode(updated.getRuleCode());
+        existing.setDescription(updated.getDescription());
+        existing.setSeverity(updated.getSeverity());
+        existing.setConditionsJson(updated.getConditionsJson());
+        existing.setActive(updated.getActive());
+
         return ruleRepo.save(existing);
     }
 
+    @Override
     public List<PolicyRule> getActiveRules() {
         return ruleRepo.findByActiveTrue();
     }
 
-    public PolicyRule getRuleByCode(String ruleCode) {
-        return ruleRepo.findByRuleCode(ruleCode)
-                .orElseThrow(() -> new ResourceNotFoundException("Rule not found"));
+    @Override
+    public Optional<PolicyRule> getRuleByCode(String ruleCode) {
+        return ruleRepo.findAll().stream()
+                .filter(r -> ruleCode.equals(r.getRuleCode()))
+                .findFirst();
     }
 
+    @Override
     public List<PolicyRule> getAllRules() {
         return ruleRepo.findAll();
     }
