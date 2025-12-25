@@ -2,11 +2,13 @@ package com.example.demo.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component   // ✅ THIS IS THE FINAL MISSING PIECE
 public class JwtUtil {
 
     private final String secret = "mysecretkeymysecretkeymysecretkey";
